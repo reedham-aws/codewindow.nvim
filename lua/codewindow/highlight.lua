@@ -107,7 +107,9 @@ local function extract_highlighting(buffer, lines)
           for y = start_row, end_row do
             for x = start_col, math.min(end_col, minimap_char_width) do
               local minimap_x, minimap_y = utils.buf_to_minimap(x, y)
-              highlights[minimap_y][minimap_x][c] = (highlights[minimap_y][minimap_x][c] or 0) + 1
+              if minimap_y <= minimap_height and minimap_x <= minimap_width then
+                highlights[minimap_y][minimap_x][c] = (highlights[minimap_y][minimap_x][c] or 0) + 1
+              end
             end
           end
         end
